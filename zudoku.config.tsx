@@ -7,6 +7,7 @@ const config: ZudokuConfig = {
       alt: "Zudoku",
       width: "130px",
     },
+    showPoweredBy: false,
   },
   navigation: [
     {
