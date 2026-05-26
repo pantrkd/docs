@@ -172,7 +172,6 @@ components:
         - title
         - subject
         - courseNumber
-        - sectionNumber
         - creditHours
         - term
         - instructor
@@ -199,9 +198,6 @@ components:
         courseNumber:
           type: integer
           example: 1101
-        sectionNumber:
-          type: integer
-          example: 0
         creditHours:
           type: integer
           example: 3
