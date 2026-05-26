@@ -15,14 +15,14 @@ paths:
     description: filter, sort and return a list of section objects
     get:
       operationId: filterSections
-      summary: Filter and sort sections
+      summary: Search Sections
       parameters:
         - name: search
           in: query
           schema:
             type: string
-          description: fuzzy search against certain fields // TODO
-          example: writing
+          description: fuzzy search against title, subject, subjectDesc, courseNumber, crn, instructor names, meetings.days, meetings.building, campus, attributes
+          example: enc 1101 no cost section thursday
         - name: crn
           in: query
           schema:
@@ -90,17 +90,16 @@ paths:
                 - sunday
           style: form
           explode: true
-        - name: isOpen
+        - name: minSeatsRemain
           in: query
           schema:
-            type: boolean
-          description: Filter for sections with remaining seats.
-          example: true
-        - name: hasWaitlist
+            type: integer
+          example: 3
+        - name: minWaitlistRemain
           in: query
           schema:
-            type: boolean
-          example: true
+            type: integer
+          example: 1
         - name: minCreditHours
           in: query
           schema:
@@ -118,13 +117,14 @@ paths:
           schema:
             type: string
             enum:
+              - crn
               - title
               - subject
               - courseNumber
               - creditHours
               - seatsRemaining
-              - instructor
-          example: title
+              - primaryInstructor
+          example: seatsRemaining
         - name: sortOrder
           in: query
           schema:
@@ -149,7 +149,7 @@ paths:
             minimum: 1
             maximum: 100
             default: 25
-          description: Maximum number of results returned per page.
+          description: Results per page.
           example: 25
       responses:
         '200':
@@ -234,6 +234,7 @@ components:
           items:
             type: integer
           example: []
+
     Instructor:
       type: object
       required:
@@ -250,6 +251,7 @@ components:
         isPrimary:
           type: boolean
           example: true
+
     Meeting:
       type: object
       required:
@@ -291,6 +293,7 @@ components:
           $ref: '#/components/schemas/SimpleDate'
         endDate:
           $ref: '#/components/schemas/SimpleDate'
+
     Time:
       type: object
       required:
@@ -307,6 +310,7 @@ components:
           minimum: 0
           maximum: 59
           example: 30
+
     SimpleDate:
       type: object
       required:
@@ -327,6 +331,7 @@ components:
           minimum: 1
           maximum: 31
           example: 17
+
     SectionStatus:
       type: object
       required:
