@@ -1,0 +1,15 @@
+.open-api-client-button {
+    display: none !important;
+}
+
+.scalar-mcp-layer {
+    display: none !important;
+}
+
+.ask-ai-button {
+    display: none !important;
+}
+
+a[href="https://www.scalar.com"] {
+    display: none !important;
+}

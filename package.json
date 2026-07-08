@@ -1,28 +1,32 @@
 {
-  "name": "course-scheduler-docs",
-  "version": "0.1.0",
-  "type": "module",
+  "name": "docs",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "zudoku dev",
-    "build": "zudoku build",
-    "preview": "wrangler dev",
-    "lint": "eslint",
-    "deploy": "wrangler deploy"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0",
-    "zudoku": "0.79.0"
+    "@scalar/api-reference-react": "^0.9.42",
+    "random-words": "^2.0.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@typescript-eslint/eslint-plugin": "^8",
-    "@typescript-eslint/parser": "^8",
-    "eslint": "^8",
-    "typescript": "^6",
-    "wrangler": "^4.95.0"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12"
   }
 }
