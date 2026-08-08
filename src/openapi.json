@@ -108,7 +108,7 @@
             }
           },
           "423": {
-            "description": "Account temporarily locked out after repeated failed login attempts. Retry after the lockout window elapses.\n",
+            "description": "Account temporarily locked out after repeated failed login attempts",
             "content": {
               "application/json": {
                 "schema": {
@@ -148,7 +148,7 @@
             }
           },
           "401": {
-            "description": "Token missing, invalid, expired, or already rotated",
+            "description": "Token invalid",
             "content": {
               "application/json": {
                 "schema": {
