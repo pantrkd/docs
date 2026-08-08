@@ -211,66 +211,6 @@
         }
       }
     },
-    "/auth/password/change": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Change password while authenticated (requires current password)",
-        "operationId": "changePassword",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "current_password",
-                  "new_password"
-                ],
-                "properties": {
-                  "current_password": {
-                    "type": "string",
-                    "format": "password"
-                  },
-                  "new_password": {
-                    "type": "string",
-                    "format": "password",
-                    "minLength": 12
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Password changed successfully"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "422": {
-            "description": "New password failed policy checks (below 12 characters)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/components/responses/TooManyRequests"
-          }
-        }
-      }
-    },
     "/sections": {
       "summary": "Course section objects",
       "description": "filter, sort and return a list of section objects",
@@ -501,7 +441,7 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Long-lived auth token returned from /auth/login or /auth/refresh. Sent as `Authorization: Bearer <token>`. Stored hashed server-side; rotated on every use of /auth/refresh.\n"
+        "description": "Long-lived auth token returned from /auth/login or /auth/refresh. Sent as `Authorization: Bearer <token>`. Stored hashed server-side; rotated on every use of /auth/refresh."
       }
     },
     "responses": {
