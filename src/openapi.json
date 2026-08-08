@@ -44,7 +44,7 @@
             "$ref": "#/components/responses/BadRequest"
           },
           "409": {
-            "description": "Username or email already in use",
+            "description": "Email already in use",
             "content": {
               "application/json": {
                 "schema": {
@@ -74,7 +74,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Log in with username and password",
+        "summary": "Log in with email and password",
         "operationId": "loginUser",
         "requestBody": {
           "required": true,
@@ -98,7 +98,7 @@
             }
           },
           "401": {
-            "description": "Invalid username or password",
+            "description": "Invalid email or password",
             "content": {
               "application/json": {
                 "schema": {
@@ -792,16 +792,10 @@
       "RegisterRequest": {
         "type": "object",
         "required": [
-          "username",
+          "email",
           "password"
         ],
         "properties": {
-          "username": {
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 32,
-            "pattern": "^[a-zA-Z0-9_.-]+$"
-          },
           "email": {
             "type": "string",
             "format": "email"
@@ -810,7 +804,7 @@
             "type": "string",
             "format": "password",
             "minLength": 12,
-            "description": "Minimum 12 characters. Hashed with Argon2id on the server; the salt is generated and stored automatically as part of the hash.\n"
+            "description": "Minimum 12 characters."
           },
           "display_name": {
             "type": "string",
@@ -821,12 +815,13 @@
       "LoginRequest": {
         "type": "object",
         "required": [
-          "username",
+          "email",
           "password"
         ],
         "properties": {
-          "username": {
-            "type": "string"
+          "email": {
+            "type": "string",
+            "format": "email"
           },
           "password": {
             "type": "string",
@@ -863,9 +858,6 @@
             "type": "string",
             "format": "uuid"
           },
-          "username": {
-            "type": "string"
-          },
           "email": {
             "type": "string",
             "format": "email"
@@ -892,12 +884,12 @@
         "properties": {
           "error": {
             "type": "string",
-            "description": "Machine-readable error code",
+            "description": "Error code",
             "example": "invalid_credentials"
           },
           "message": {
             "type": "string",
-            "description": "Human-readable explanation"
+            "description": "Human readable message"
           }
         }
       }
