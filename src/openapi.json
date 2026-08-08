@@ -17,7 +17,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Register a new user",
+        "summary": "Register",
         "operationId": "registerUser",
         "requestBody": {
           "required": true,
@@ -74,7 +74,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Log in with email and password",
+        "summary": "Login",
         "operationId": "loginUser",
         "requestBody": {
           "required": true,
@@ -128,7 +128,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Rotate the current auth token for a new one",
+        "summary": "Refresh token",
         "description": "Invalidates the presented token and issues a new one. The old token's hash is marked used/revoked in storage; reuse of an already- rotated token should be treated as a signal of token compromise and revoke the token chain.\n",
         "operationId": "refreshToken",
         "security": [
@@ -165,7 +165,8 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Revoke the current auth token",
+        "summary": "Logout",
+        "description": "Revokes the current token being used.",
         "operationId": "logoutUser",
         "security": [
           {
@@ -187,7 +188,8 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Get a short confirmation of the currently authenticated user",
+        "summary": "Current User",
+        "description": "Get the current authenticated user information.",
         "operationId": "getCurrentUser",
         "security": [
           {
@@ -196,7 +198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Confirmation phrase naming the logged-in user",
+            "description": "The user who owns the token.",
             "content": {
               "application/json": {
                 "schema": {
