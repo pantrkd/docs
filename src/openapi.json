@@ -188,7 +188,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Current User",
+        "summary": "Get Token Owner",
         "description": "Get the current authenticated user information.",
         "operationId": "getCurrentUser",
         "security": [
