@@ -129,7 +129,7 @@
           "Auth"
         ],
         "summary": "Refresh token",
-        "description": "Invalidates the presented token and issues a new one. The old token's hash is marked used/revoked in storage; reuse of an already- rotated token should be treated as a signal of token compromise and revoke the token chain.\n",
+        "description": "Invalidates the presented token and issues a new one.",
         "operationId": "refreshToken",
         "security": [
           {
@@ -788,8 +788,8 @@
         "properties": {
           "message": {
             "type": "string",
-            "description": "Short confirmation phrase naming the logged-in user",
-            "example": "Logged in as jdoe"
+            "description": "Returns the email of the authenticated user.",
+            "example": "user@university.edu"
           }
         }
       },
