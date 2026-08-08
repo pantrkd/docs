@@ -443,7 +443,7 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Long-lived auth token returned from /auth/login or /auth/refresh. Sent as `Authorization: Bearer <token>`. Stored hashed server-side; rotated on every use of /auth/refresh."
+        "description": "Long-lived auth token."
       }
     },
     "responses": {
