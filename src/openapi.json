@@ -221,21 +221,33 @@
         "summary": "Search Sections",
         "parameters": [
           {
-            "name": "search",
+            "name": "operator",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "and",
+                "or"
+              ],
+              "default": "or"
             },
-            "description": "fuzzy search against title, subject, subjectDesc, courseNumber, crn, instructor names, meetings.days, meetings.building, campus, attributes",
-            "example": "enc 1101 no cost section thursday"
+            "description": "Logical operator used to combine filter conditions.",
+            "example": "or"
           },
           {
             "name": "crn",
             "in": "query",
             "schema": {
-              "type": "number"
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
             },
-            "example": 82001
+            "style": "form",
+            "explode": true,
+            "example": [
+              82001
+            ]
           },
           {
             "name": "subject",
@@ -257,36 +269,19 @@
             "name": "courseNumber",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
             },
-            "example": 1101
+            "style": "form",
+            "explode": true,
+            "example": [
+              1101
+            ]
           },
           {
             "name": "term",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Fall 2026"
-          },
-          {
-            "name": "campus",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Main Campus-UNF"
-          },
-          {
-            "name": "instructor",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Mary Humphries"
-          },
-          {
-            "name": "attributes",
             "in": "query",
             "schema": {
               "type": "array",
@@ -297,19 +292,71 @@
             "style": "form",
             "explode": true,
             "example": [
-              "General Education Course"
+              "Fall 2026"
             ]
           },
           {
-            "name": "scheduleType",
+            "name": "campus",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
-            "example": "Class"
+            "style": "form",
+            "explode": true,
+            "example": [
+              "Main Campus-UNF"
+            ]
           },
           {
-            "name": "days",
+            "name": "instructorName",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "example": [
+              "Mary Humphries"
+            ]
+          },
+          {
+            "name": "instructorEmail",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "example": [
+              "n0385603@unf.edu"
+            ]
+          },
+          {
+            "name": "isPrimary",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "example": [
+              true
+            ]
+          },
+          {
+            "name": "meetingDay",
             "in": "query",
             "schema": {
               "type": "array",
@@ -330,7 +377,200 @@
             "explode": true
           },
           {
-            "name": "minSeatsRemain",
+            "name": "meetingHasMeeting",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingType",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "example": [
+              "class"
+            ]
+          },
+          {
+            "name": "meetingStartTimeHour",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingStartTimeMinute",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingEndTimeHour",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingEndTimeMinute",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingBuilding",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "example": [
+              "9-mcaffe auditor hall"
+            ]
+          },
+          {
+            "name": "meetingStartDateYear",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingStartDateMonth",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingStartDateDay",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingEndDateYear",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingEndDateMonth",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "meetingEndDateDay",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "isFull",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "example": [
+              false
+            ]
+          },
+          {
+            "name": "minSeatsRemaining",
             "in": "query",
             "schema": {
               "type": "integer"
@@ -338,7 +578,7 @@
             "example": 3
           },
           {
-            "name": "minWaitlistRemain",
+            "name": "minWaitlistRemaining",
             "in": "query",
             "schema": {
               "type": "integer"
@@ -410,11 +650,11 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "default": 25
+              "maximum": 50,
+              "default": 50
             },
             "description": "Results per page.",
-            "example": 25
+            "example": 50
           }
         ],
         "responses": {
@@ -422,17 +662,42 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Section"
+                  "type": "object",
+                  "required": [
+                    "page",
+                    "limit",
+                    "data"
+                  ],
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "example": 50
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Section"
+                      }
+                    }
                   }
                 }
               }
             },
             "description": "OK"
           },
-          "503": {
-            "description": "Unable to fetch data from the database"
+          "500": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Internal server error. Body is the raw exception message."
           }
         }
       }
